@@ -1,4 +1,4 @@
-<image src="https://github.com/giovanni-iannaccone/ians/others/view.jpg"/>
+![view](https://user-images.githubusercontent.com/80602545/184477861-2b047baa-d321-4ade-b22a-769642ff5d4f.jpg)
 
 ENGLISH
 Hi, I'm Giovanni Iannaccone and when I wrote this tool (2022) I was 15 years old. I took part of the code from books/blog and I riadapted it especially for this tool. You have certainly noticed that it has 9 manner: port scanning, sniffing, DDos attacks, ARP poisoning, bruteforce, trojan creation, chat room ssh, site mapper and username finder. Obviously everything is open source and you can modify the code based on your needs, I tryed to make it the more complete I could hope you'll like it and it will be useful.
