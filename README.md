@@ -1,6 +1,7 @@
 ![view](https://user-images.githubusercontent.com/80602545/184477861-2b047baa-d321-4ade-b22a-769642ff5d4f.jpg)
 
-ENGLISH
+# ENGLISH
+
 Hi, I'm Giovanni Iannaccone and when I wrote this tool (2022) I was 15 years old. I took part of the code from books/blog and I riadapted it especially for this tool. You have certainly noticed that it has 9 manner: port scanning, sniffing, DDos attacks, ARP poisoning, bruteforce, trojan creation, chat room ssh, site mapper and username finder. Obviously everything is open source and you can modify the code based on your needs, I tryed to make it the more complete I could hope you'll like it and it will be useful.
 To start it you have to type the following commands:
 # cd bash_file
@@ -12,7 +13,8 @@ Don't lost any update: https://github.com/giovanni-iannaccone/ians
 OBVIOUSLY EVERYTHING IS WRITTEN FOR EDUCATIONAL PURPOSE, THE USER KNOW WHAT HE IS DOING AND THE AUTHOR IS NOT RESPONSIBLE FOR ANY ILLEGAL USE OF THIS TOOL
 
 
-ITALIANO 
+# ITALIANO 
+
 Ciao, mi chiamo Giovanni Iannaccone e quando scrissi questo tool (2022) avevo 15 anni. Parte del codice non l'ho scritta io, ma l'ho presa da libri/blog e poi riadattata appositamente per funzionare su questo tool. Come avete sicuramente notato ha 9 modalità: port scanning, sniffing, attacchi DDos, ARP poisoning bruteforce, creazione di trojan, creazione di una chat room ssh, mappatura di siti e ricerce di username. Ovviamente il tutto è open source e potete modificare il codice a seconda delle vostre esigenze, io ho cercato di renderlo il più completo possibile. Spero vi piaccia e vi sia utile.
 Per avviarlo dovrete digitare i seguenti comandi:
 # cd bash_file
