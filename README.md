@@ -8,7 +8,7 @@ To start it you have to type the following commands:
 cd bash_file
 ```
 ```
-chmod + x install.sh
+chmod +x install.sh
 ```
 ```
 ./install.sh
@@ -32,7 +32,7 @@ Per avviarlo dovrete digitare i seguenti comandi:
 cd bash_file
 ```
 ```
-chmod + x install.sh
+chmod +x install.sh
 ```
 ```
 ./install.sh
