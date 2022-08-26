@@ -29,6 +29,10 @@ class Check:
         self.link = f"https://about.me/{self.username}"
         self.check("About me")
 
+    def animeplanet(self):
+        self.link = f"https://www.anime-planet.com/users/{self.username}"
+        self.check("Anime planet")
+
     def badoo(self):
         self.link = f"https://badoo.com/en/{self.username}"
         self.check("Badoo")
@@ -38,6 +42,10 @@ class Check:
             self.link = f"https://{self.username}.blogspot.com"
             self.check("Blogger")
 
+    def chess(self):
+        self.link = f"https://www.chess.com/member/{self.username}"
+        self.check("Chess")
+
     def codecademy(self):
         self.link = f"https://codecademy.com/{self.username}"
         self.check("Codecademy")
@@ -46,6 +54,10 @@ class Check:
         if "." not in self.username:
             self.link = f"https://{self.username}.deviantart.com"
             self.check("Deviantart")
+
+    def duolingo(self):
+        self.link = f"https://www.duolingo.com/2017-06-30/users?username={self.username}&_=1628308619574"
+        self.check("Duolingo")
 
     def ebay(self):
         self.link = f"https://ebay.com/usr/{self.username}"
@@ -79,6 +91,14 @@ class Check:
         self.link = f"https://instagram.com/{self.username}"
         self.check("Instagram")   
 
+    def linktree(self):
+        self.link = f"https://linktr.ee/{self.username}"
+        self.check("Linktree")
+
+    def minecraft(self):
+        self.link = f"https://playerdb.co/api/player/minecraft/{self.username}"
+        self.check("Minecraft")
+
     def ngl(self):
         self.link = f"https://ngl.link/{self.username}"
         self.check("Ngl")
@@ -95,6 +115,14 @@ class Check:
         self.link = f"https://pinterest.com/{self.username}"
         self.check("Pinterest")  
 
+    def playstation_network(self):
+        self.link = f"https://psnprofiles.com/{self.username}"
+        self.check("Playstation network")
+
+    def pornhub(self):
+        self.link = f"https://www.pornhub.com/users/{self.username}"
+        self.check("Pornhub")
+
     def reddit(self):
         self.link = f"https://reddit.com/user/{self.username}"
         self.check("Reddit")   
@@ -103,15 +131,27 @@ class Check:
         self.link = f"https://roblox.com/user.aspx?username={self.username}"
         self.check("Roblox")
 
+    def rumble(self):
+        self.link = f"https://rumble.com/user/{self.username}"
+        self.check("Rumble")
+
     def slack(self):
         if "." not in self.username:
             self.link = f"https://{self.username}.slack.com"
             self.check("Slack")
 
+    def slideshare(self):
+        self.link = f"https://www.slideshare.net/{self.username}"
+        self.check("Slideshare")
+
+    def snapchat(self):
+        self.link = f"https://feelinsonice.appspot.com/web/deeplink/snapcode?username={self.username}&size=400&type=SVG"
+        self.check("Snapchat")
+
     def soundcloud(self):
         self.link = f"https://soundcloud.com/{self.username}"
         self.check("Sound cloud")
-
+    
     def spotify(self):
         self.link = f"https://open.spotify.com/user/{self.username}"
         self.check("Spotify")
@@ -120,9 +160,17 @@ class Check:
         self.link = f"https://steamcommunity.com/id/{self.username}"
         self.check("Steam")
 
+    def telegram(self):
+        self.link = f"https://t.me/{self.username}"
+        self.check("Telegram")
+
     def tiktok(self):
         self.link = f"https://tiktok.com/@{self.username}"
         self.check("TikTok")
+
+    def tinder(self):
+        self.link = f"https://tinder.com/@{self.username}"
+        self.check("Tinder")
 
     def tumblr(self):
         if "." not in self.username:
@@ -145,10 +193,22 @@ class Check:
         self.link = f"https://wikipedia.org/wiki/User:{self.username}"
         self.check("Wikipedia")
 
-    def wordpress(self):
+    def wordpress_profile(self):
+        self.link = f"https://profiles.wordpress.org/{self.username}/"
+        self.check("Wordpress profile")
+
+    def wordpress_site(self):
         if "." not in self.username:
             self.link = f"https://{self.username}.wordpress.com"
-            self.check("Wordpress")
+            self.check("Wordpress site")
+
+    def xboxgamertag(self):
+        self.link = f"https://www.xboxgamertag.com/search/{self.username}"
+        self.check("Xbox gamertag")
+
+    def xvideos(self):
+        self.link = f"https://www.xvideos.com/profiles/{self.username}"
+        self.check("Xvideos")
 
     def youtube(self):
         self.link = f"https://youtube.com/{self.username}"
@@ -159,10 +219,13 @@ def checker(username):
         check = Check(username)
 
         check.aboutme()
+        check.animeplanet()
         check.badoo()
         check.blogger()
+        check.chess()        
         check.codecademy()
         check.deviantart()
+        check.duolingo()
         check.ebay()
         check.facebook()
         check.flickr()
@@ -171,38 +234,63 @@ def checker(username):
         check.googleplus()
         check.hackernews()
         check.instagram()
+        check.linktree()
+        check.minecraft()
         check.ngl()
         check.onlyfans()
         check.pastebin()
         check.pinterest()
+        check.playstation_network()
+        check.pornhub()
         check.reddit()
         check.roblox()
+        check.rumble()
         check.slack()
+        check.slideshare()
         check.soundcloud()
+        check.snapchat()        
         check.spotify()
         check.steam()
+        check.telegram()
         check.tiktok()
+        check.tinder()
         check.tumblr()
         check.twitch()
         check.twitter()
         check.vimeo()
         check.wikipedia()
-        check.wordpress()
+        check.wordpress_profile()
+        check.wordpress_site()
+        check.xboxgamertag()
+        check.xvideos()
         check.youtube()
 
     except Exception:
         exiting()
 
+def allowed(username):
+    allowed_char = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+                    ".", "_", 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+    
+    if not len(username):
+        return False
+
+    for char in username:
+        if char not in allowed_char:
+            return False
+
+    return True
+
 def exiting():
     console.print("\nExiting...", style="bold red")
-    sys.exit()
+    sys.exit()   
 
 def initialize():
     try:
         global console
         console = Console()
         show_banner()
-        console.print("  A username's finder across 20 social networks", style="bold red")
+        console.print("  A username's finder across 46 social networks", style="bold red")
 
         username = console.input("\n[bold blue][+][/bold blue] Enter the username you want to search: ")
 
@@ -216,7 +304,7 @@ def initialize():
     except KeyboardInterrupt:
         exiting()
 
-    exiting()   
+    exiting()
 
 def show_banner():
     banner = """
@@ -240,16 +328,3 @@ def show_banner():
     """
 
     console.print(banner, style="bold blue")
-
-def allowed(username):
-    allowed_char = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
-                    ".", "_", 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
-    
-    if not len(username):
-        return False
-
-    for char in username:
-        if char not in allowed_char:
-            return False
-
-    return True
