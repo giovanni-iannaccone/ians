@@ -1,6 +1,7 @@
 <div id="header">
   <img src="https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue" width=100/>
-  <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" width=100/>
+  <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" width=90/>
+  <br>
 </div>
 
 ![view](https://user-images.githubusercontent.com/80602545/184477861-2b047baa-d321-4ade-b22a-769642ff5d4f.jpg)
