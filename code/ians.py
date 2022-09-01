@@ -57,6 +57,9 @@ def ascii_art_ians():
                 """
     console.print(banner, style="bold green")
 
+    console.print("\n    FOR EDUCATIONAL PURPOSE ONLY", style="bold red")
+    console.print("\n    SELECT AN OPTION TO CONTINUE", style="bold")
+    
 def ascii_art_warning():
     console.print("═" * 121, style="bold red")
     console.print("═" * 38 + " https://github.com/giovanni-iannaccone/ians " + "═" * 38, style="bold red")
@@ -125,8 +128,6 @@ def exiting():
 
 def main():
     ascii_art_ians()
-    console.print("\n    FOR EDUCATIONAL PURPOSE ONLY", style="bold red")
-    console.print("\n    SELECT AN OPTION TO CONTINUE", style="bold")
     show_options()
     while True:
         option = option_input()
@@ -175,6 +176,8 @@ def main():
 
         elif option == 13:
             update()
+            ascii_art_ians()
+            show_options()
 
         else:
             exiting()
