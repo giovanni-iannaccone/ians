@@ -1,5 +1,6 @@
 [![GitHub Repo Size](https://img.shields.io/github/languages/code-size/giovanni-iannaccone/ians)](https://github.com/giovanni-iannaccone/ians)
 [![GitHub Issues](https://img.shields.io/bitbucket/issues-raw/giovanni-iannaccone/ians)](https://github.com/giovanni-iannaccone/ians)
+[![GitHub State](https://img.shields.io/badge/State-beta-green)](https://github.com/giovanni-iannaccone/ians)
 [![GitHub Supported Os](https://img.shields.io/badge/OS-linux-blue)](https://github.com/giovanni-iannaccone/ians)
 
 ![view](https://user-images.githubusercontent.com/80602545/184477861-2b047baa-d321-4ade-b22a-769642ff5d4f.jpg)
