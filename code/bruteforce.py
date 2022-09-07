@@ -84,7 +84,7 @@ def initialize():
     console = Console()
     show_banner()
     console.print("\n\tA tool for HTML's autenthication form bruterorce\n", style="bold red")
-    SUCCESS = "Welcome !!!"
+    SUCCESS = "Welcome"
     TARGET = console.input("[bold blue][+][/bold blue] Type the target: ")
     console.print("\nYou cane use our wordlist [bold red]little_dictionary.txt[/bold red] from ians on its github repository", style="italic")
     WORDLIST = console.input("[bold blue][+][/bold blue] Type the directory of the wordlist: ")
