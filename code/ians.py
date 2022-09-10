@@ -17,9 +17,10 @@ import user_finder
 import os
 import subprocess
 import sys
+import time
 
 def arp_a():
-    os.system("cls" if os.name == "nt" else "clear")
+    clear_screen()
     output = subprocess.check_output("arp -a", shell=True).decode().split()
     print("Connected:")
     user = 0
@@ -283,11 +284,16 @@ if __name__ == "__main__":
     console = Console()
     version = 1.0
     try:
-        os.system("chmod +x ../bash_file/setup.sh")
-        if os.system("../bash_file/setup.sh") == 256:
-            sys.exit(1)
-
+        if os.name != "nt":
+            os.system("chmod +x ../bash_file/setup.sh")
+            if os.system("../bash_file/setup.sh") == 256:
+                sys.exit(1)
+        else:
+            console.print("You are using windows os, this can cause some problems", style="bold red")
+            time.sleep(2)
+            
         clear_screen()
+            
         ascii_art_warning()
         main()
     except KeyboardInterrupt:
