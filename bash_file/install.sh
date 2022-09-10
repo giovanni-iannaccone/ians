@@ -1,3 +1,4 @@
+#!/bin/bash
 blue="\e[34m"
 green="\033[92m"
 red="\e[1;31m"
@@ -15,7 +16,7 @@ echo "\n"
 
 #checking for python
 echo  "$yellow [ * ] Checking for python"
-which python > /dev/null 2>&1
+which python3 > /dev/null 2>&1
 if [ "$?" -eq "0" ]; then
     echo "$green [ ✔ ]::[Python]: found"
     sleep 1
@@ -23,15 +24,15 @@ else
     echo "$red [ X ]::[Python]: python not found"
     sleep 1
     echo "$yellow [!]::[Installing Module Python...]"
-    apt install python3
-    apt install pip
-    apt install pip2
-    pip2 install --upgrade pip
+    apt -y install git
+    apt -y install python3
+    apt -y install python3-pip
+    pip3 install --upgrade pip
 fi
 
 #installing requirements
 echo "$yellow [ * ] Installing requirements"
-pip install -r ../requirements.txt
+pip3 install -r ../requirements.txt
 echo "$blue [ ✔ ] Requirements installed"
 sleep 1
 

@@ -1,3 +1,4 @@
+#!/bin/bash
 blue="\e[34m"
 
 clear
