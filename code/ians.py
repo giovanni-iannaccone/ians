@@ -21,20 +21,27 @@ import time
 
 def arp_a():
     clear_screen()
-    output = subprocess.check_output("arp -a", shell=True).decode().split()
-    print("Connected:")
-    user = 0
+    output = subprocess.check_output("arp -a", shell=True)
 
-    for i in range(1, len(output)//3):
-        print()
-        console.print(f"IP: [bold blue]{output[i]}[/bold blue]")
-        i += 2
-        console.print(f"MAC: [bold blue]{output[i]}[/bold blue]")
-        i += 3
-        console.print(f"Interface: [bold blue]{output[i]}[/bold blue]")
-        user += 1
+    if os.name == "nt":
+        console.print(output, style="bold blue")
+    else:
+        output = output.decode()
+        print("Connected:\n")
+        users = 0
 
-    console.print(f"\n\n{user} users connected", style="green")
+        for line in output.split():
+            if "." in line:
+                console.print(f"IP: [bold blue]{line}[/bold blue]")
+                users += 1
+            elif ":" in line or line == "<incomplete>":
+                console.print(f"MAC: [bold blue]{line}[/bold blue]") 
+            elif line not in ("?", "at", "[ether]", "on"):
+                console.print(f"Interface: [bold blue]{line}[/bold blue]")
+                print()
+            
+
+        console.print(f"\n\n{users} users connected", style="green")
     console.input("[red]Press [bold]ENTER[/bold] to return to the menu...[red]")
     main()
 
