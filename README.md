@@ -25,7 +25,13 @@ chmod +x install.sh
 ./install.sh
 ```
 ```
-cd ../code
+cd ..
+```
+```
+pip install -r requirements.txt 
+```
+```
+cd code
 ```
 ```
 sudo python3 ians.py
