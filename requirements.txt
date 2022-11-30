@@ -1,6 +1,6 @@
-charset-normalizer==2.0.6
-lxml==4.7.1
-requests==2.25.1
-rich==10.16.2
-scapy==2.4.4
-urllib3==1.26.5
+charset-normalizer
+lxml
+requests
+rich
+scapy
+urllib3
