@@ -23,6 +23,7 @@ echo -e "$default [User: $USER]"
 if [[ $EUID -ne 0 ]]; then
    echo -ne "$red [ x ]::[User]: ( no root )"
    sleep 0.5
+   echo -e "$default"
    exit 1
 else
     echo -e "$green [ ✔ ]::[User]: ROOT"
@@ -31,14 +32,15 @@ fi
 
 #checking for internet connection
 echo -e "$yellow [ * ] Checking for internet connection"
-echo -e "GET http://google.com HTTP/1.0\n\n" | nc google.com 80 > /dev/null 2>&1
-if [ "$?" -ne "0" ]; then
-    echo -e "$red [ X ]::[Internet Connection]: OFFLINE!"
+if ping -q -c -l -W 1 8.8.8.1 > /dev/null;
+then
+    echo -e "$green [ X ]::[Internet Connection]: ONLINE"
     sleep 0.5
-    exit 1
 else
-    echo -e "$green [ ✔ ]::[Internet Connection]: ONLINE"
+    echo -e "$red [ ✔ ]::[Internet Connection]: OFFLINE"
     sleep 0.5
+    echo -e "$default"
+    exit 1
 fi
 
 echo -e "\n$blue [-- Starting $ IANS $ --]"
