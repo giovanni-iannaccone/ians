@@ -13,19 +13,6 @@ echo -e "$blue ╚═╝╚═╝  ╚═══╝╚══════╝   ╚
 
 echo
 
-#checking for root user
-echo -e "$yellow [ * ] Checking for root user"
-echo -e "$default [User: $USER]"
-if [[ $EUID -ne 0 ]]; then
-   echo -ne "$red [ x ]::[User]: ( no root )"
-   sleep 0.5
-   echo -e "$default"
-   exit 1
-else
-    echo -e "$green [ ✔ ]::[User]: ROOT"
-    sleep 0.5
-fi
-
 #checking for internet connection
 echo -e "$yellow [ * ] Checking for internet connection"
 if ping -q -c -l -W 1 8.8.8.1 > /dev/null;
@@ -57,7 +44,7 @@ fi
 
 #installing requirements
 echo -e "$yellow [ * ] Installing requirements"
-pip install -r ../requirements.txt
+sudo pip install -r ../requirements.txt
 echo -e "$blue [ ✔ ] Requirements installed"
 sleep 1
 
