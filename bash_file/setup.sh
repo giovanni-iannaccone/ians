@@ -32,7 +32,7 @@ fi
 
 #checking for internet connection
 echo -e "$yellow [ * ] Checking for internet connection"
-if ping -q -c -l -W 1 8.8.8.1 > /dev/null;
+if ping -q -c 1 -W 1 8.8.8.8 > /dev/null;
 then
     echo -e "$green [ X ]::[Internet Connection]: ONLINE"
     sleep 0.5
