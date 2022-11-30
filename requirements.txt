@@ -19,7 +19,6 @@ anyio==3.5.0
 apispec==5.1.1
 apispec-webframeworks==0.5.2
 appdirs==1.4.4
-APScheduler==0.0.0
 art==5.6
 asciitree==0.3.3
 asgiref==3.5.0
@@ -31,7 +30,6 @@ autobahn==21.11.1
 Automat==20.2.0
 Babel==2.8.0
 backcall==0.2.0
-backdoor-factory==0.0.0
 backoff==1.11.1
 base58==1.0.3
 basemap==1.2.1
@@ -127,7 +125,6 @@ hpack==4.0.0
 html2text==2020.1.16
 html5lib==1.1
 httpagentparser==1.9.1
-humanize==0.0.0
 hupper==1.10.3
 hyperframe==6.0.0
 hyperlink==21.0.0
@@ -136,7 +133,6 @@ idna==3.2
 impacket==0.9.24
 importlib-metadata==4.6.4
 incremental==17.5.0
-iniconfig==0.0.0
 invoke==1.4.1
 ipaddr==2.2.0
 iptools==0.6.1
@@ -187,7 +183,6 @@ mistune==0.8.4
 mitmproxy==6.0.2
 mnemonic==0.19
 more-itertools==8.10.0
-mpmath==0.0.0
 msgpack==1.0.2
 msldap==0.3.30
 multidict==5.1.0
