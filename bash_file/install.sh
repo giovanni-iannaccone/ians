@@ -13,7 +13,7 @@ echo -e "$blue ██║██║╚██╗██║╚════██║  
 echo -e "$blue ██║██║ ╚████║███████║   ██║   ██║  ██║███████╗███████╗██║██║ ╚████║╚██████╔╝██╗██╗██╗ $default"
 echo -e "$blue ╚═╝╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝╚═╝╚═╝ $default"
 
-echo
+echo -e
 
 #checking for internet connection
 echo -e "$yellow [ * ] Checking for internet connection $default"
