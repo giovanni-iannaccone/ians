@@ -23,7 +23,7 @@ def exiting():
     sys.exit()
 
 def extract_json():
-    with open("../others/common_ports.json", "r") as file:
+    with open("../utilities/common_ports.json", "r") as file:
         data = json.load(file)
         file.close()
         return data
