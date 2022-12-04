@@ -62,7 +62,7 @@ def get_words(resume=None):
             with open(WORDLIST) as f:
                 raw_words = f.read()
         except Exception:
-            WORDLIST = "../others/little_dictionary.txt"
+            WORDLIST = "../utilities/little_dictionary.txt"
         else:
             break
 
@@ -95,7 +95,7 @@ def initialize():
 
         TARGET = console.input("[bold blue][+][/bold blue] Type the target: ")
         THREADS = os.cpu_count()
-        console.print("\nYou can use our ../others/little_dictionary.txt", style="red")
+        console.print("\nYou can use our ../utilities/little_dictionary.txt", style="red")
         WORDLIST = console.input("[bold blue][+][/bold blue] Enter the directory where you have the wordlist: ")
         words = get_words()
         console.print(f"[bold blue][+][/bold blue] The found directories/files will be saved on {TARGET}.txt")
