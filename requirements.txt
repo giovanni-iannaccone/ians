@@ -1,6 +1,4 @@
-charset-normalizer
 lxml
 requests
 rich
 scapy
-urllib3
