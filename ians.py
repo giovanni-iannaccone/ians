@@ -189,6 +189,8 @@ def main():
 
         else:
             exiting()
+            
+        main()
 
 def mapper_options():
     console.print("\n[bold blue][1][/bold blue] if you have an open source site ")
