@@ -42,6 +42,14 @@ class Check:
             self.link = f"https://{self.username}.blogspot.com"
             self.check("Blogger")
 
+    def canva(self):
+        self.link = f"https://www.canva.com/{self.username}"
+        self.check("Canva")
+
+    def cashme(self):
+        self.link = f"https://cash.me/{self.username}"
+        self.check("CashMe")
+
     def chess(self):
         self.link = f"https://www.chess.com/member/{self.username}"
         self.check("Chess")
@@ -55,8 +63,12 @@ class Check:
             self.link = f"https://{self.username}.deviantart.com"
             self.check("Deviantart")
 
+    def disqus(self):
+        self.link = f"https://disqus.com/{self.username}"
+        self.check("Disqus")
+
     def duolingo(self):
-        self.link = f"https://www.duolingo.com/2017-06-30/users?username={self.username}&_=1628308619574"
+        self.link = f"https://www.duolingo.com/profile/{self.username}?via=share_profile"
         self.check("Duolingo")
 
     def ebay(self):
@@ -66,6 +78,10 @@ class Check:
     def facebook(self):
         self.link = f"https://facebook.com/{self.username}"
         self.check("Facebook")
+
+    def fotolog(self):
+        self.link = f"https://fotolog.com/{self.username}"
+        self.check("Fotolog")
 
     def flickr(self):
         self.link = f"https://flickr.com/people/{self.username}"
@@ -94,6 +110,10 @@ class Check:
     def linktree(self):
         self.link = f"https://linktr.ee/{self.username}"
         self.check("Linktree")
+    
+    def medium(self):
+        self.link = f"https://medium.com/@{self.username}"
+        self.check("Medium")
 
     def minecraft(self):
         self.link = f"https://playerdb.co/api/player/minecraft/{self.username}"
@@ -189,6 +209,10 @@ class Check:
         self.link = f"https://vimeo.com/{self.username}"
         self.check("Vimeo")
 
+    def wattpad(self):
+        self.link = f"https://www.wattpad.com/user/{self.username}"
+        self.check("Wattpad")
+
     def wikipedia(self):
         self.link = f"https://wikipedia.org/wiki/User:{self.username}"
         self.check("Wikipedia")
@@ -222,12 +246,16 @@ def checker(username):
         check.animeplanet()
         check.badoo()
         check.blogger()
+        check.canva()
+        check.cashme()
         check.chess()        
         check.codecademy()
         check.deviantart()
+        check.disqus()
         check.duolingo()
         check.ebay()
         check.facebook()
+        check.fotolog()
         check.flickr()
         check.flipboard()
         check.github()
@@ -235,6 +263,7 @@ def checker(username):
         check.hackernews()
         check.instagram()
         check.linktree()
+        check.medium()
         check.minecraft()
         check.ngl()
         check.onlyfans()
@@ -258,6 +287,7 @@ def checker(username):
         check.twitch()
         check.twitter()
         check.vimeo()
+        check.wattpad()
         check.wikipedia()
         check.wordpress_profile()
         check.wordpress_site()
@@ -270,7 +300,7 @@ def checker(username):
 
 def allowed(username):
     allowed_char = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
-                    ".", "_", 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+                    ".", "_", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
     
     if not len(username):
         return False

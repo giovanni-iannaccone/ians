@@ -16,15 +16,13 @@ git clone https://github.com/giovanni-iannaccone/ians
 cd ians
 ```
 ```
-cd bash_file
-```
-```
 chmod +x install.sh
 ```
 ```
 ./install.sh
 ```
 ```
+
 cd ..
 ```
 ```
@@ -34,6 +32,7 @@ pip install -r requirements.txt
 cd code
 ```
 ```
+
 sudo python3 ians.py
 ```
 
@@ -52,16 +51,10 @@ git clone https://github.com/giovanni-iannaccone/ians
 cd ians
 ```
 ```
-cd bash_file
-```
-```
 chmod +x install.sh
 ```
 ```
 ./install.sh
-```
-```
-cd ../code
 ```
 ```
 sudo python3 ians.py

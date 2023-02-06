@@ -1,18 +1,18 @@
 from rich.console import Console
 
-import arper
-import bruteforce
-import client_ssh
-import directory_bruter
-import ddos 
-import image_sniffer
-import mail_sniffer
-import mapper
-import port_scan
-import server_ssh
-import sniffer
-import trojan_creation
-import user_finder
+import src.arper as arper
+import src.bruteforce as bruteforce
+import src.client_ssh as client_ssh
+import src.directory_bruter as directory_bruter
+import src.ddos as ddos
+import src.image_sniffer as image_sniffer
+import src.mail_sniffer as mail_sniffer
+import src.mapper as mapper
+import src.port_scan as port_scan
+import src.server_ssh as server_ssh
+import src.sniffer as sniffer
+import src.trojan_creation as trojan_creation
+import src.user_finder as user_finder
 
 import os
 import subprocess
@@ -189,6 +189,8 @@ def main():
 
         else:
             exiting()
+            
+        main()
 
 def mapper_options():
     console.print("\n[bold blue][1][/bold blue] if you have an open source site ")
@@ -284,16 +286,16 @@ def sniffer_options():
         main()
 
 def update():
-    os.system("chmod +x ../bash_file/update.sh")
-    os.system("../bash_file/update.sh")
+    os.system("chmod +x update.sh")
+    os.system("./update.sh")
 
 if __name__ == "__main__":
     console = Console()
     version = 1.0
     try:
         if os.name != "nt":
-            os.system("chmod +x ../bash_file/setup.sh")
-            if os.system("../bash_file/setup.sh") == 256:
+            os.system("chmod +x setup.sh")
+            if os.system("./setup.sh") == 256:
                 sys.exit(1)
         else:
             console.print("You are using windows os, this can cause some problems", style="bold red")
