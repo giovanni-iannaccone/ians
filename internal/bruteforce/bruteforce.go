@@ -1,0 +1,5 @@
+package bruteforce
+
+func Initialize() {
+	
+}

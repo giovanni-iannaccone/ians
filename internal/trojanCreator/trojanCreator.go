@@ -1,0 +1,5 @@
+package trojanCreator
+
+func Initialize() {
+	
+}

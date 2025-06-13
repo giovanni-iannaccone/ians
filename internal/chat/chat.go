@@ -1,0 +1,5 @@
+package chat 
+
+func Initialize() {
+	
+}

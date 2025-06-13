@@ -1,0 +1,5 @@
+package arpPoison
+
+func Initialize() {
+	
+}

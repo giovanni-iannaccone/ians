@@ -1,0 +1,5 @@
+package ddos
+
+func Initialize() {
+	
+}
