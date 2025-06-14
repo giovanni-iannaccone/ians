@@ -9,7 +9,11 @@ func Main(version string) {
 }
 
 func PortScanner() {
+	console.Print(console.BoldBlue, portScanner)
+}
 
+func Sniffer() {
+	console.Print(console.BoldRed, sniffer)
 }
 
 func UserRecon() {

@@ -129,14 +129,14 @@ func Initialize() {
 
 	addrs, err := net.LookupIP(target)
 	if err != nil {
-		console.Error("Error acquiring IP address: %s", err)
+		console.Error("Error acquiring IP address: %s", err.Error())
 		os.Exit(1)
 	}
 	addr := addrs[0].String()
 
 	err = jsonUtils.ExtractData("utils/common_ports.json", &jsonData)
 	if err != nil {
-		console.Error("Error reading JSON data: %s", err)
+		console.Error("Error reading JSON data: %s", err.Error())
 	}
 
 	console.Println(console.Reset, "IP address for %s acquired: %s", target, addr)
@@ -160,7 +160,7 @@ func Initialize() {
 
 	err = run(&jsonData, submitter, addr)
 	if err != nil {
-		console.Error("Error during scan: %s", err)
+		console.Error("Error during scan: %s", err.Error())
 	}
 
 	console.Println(console.Reset, "\n")
