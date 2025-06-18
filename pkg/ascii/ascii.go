@@ -4,16 +4,20 @@ import (
 	"console"
 )
 
+func Chat() {
+	console.Print(console.BoldYellow, chatBanner)
+}
+
 func Main(version string) {
 	console.Print(console.BoldGreen, mainBanner, version)
 }
 
 func PortScanner() {
-	console.Print(console.BoldBlue, portScanner)
+	console.Print(console.BoldBlue, portScannerBanner)
 }
 
 func Sniffer() {
-	console.Print(console.BoldRed, sniffer)
+	console.Print(console.BoldRed, snifferBanner)
 }
 
 func UserRecon() {
