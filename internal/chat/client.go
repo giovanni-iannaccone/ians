@@ -3,14 +3,13 @@ package chat
 import (
 	"console"
 
-	"errors"
 	"fmt"
 	"net"
 	"os"
 	"reflect"
 )
 
-func connect(ip string, port uint) (net.Conn, error) {
+func connect(ip string, port uint, needPasswd *bool) (net.Conn, error) {
 	passwd := make([]byte, 4)
 	conn, err := net.Dial("tcp", fmt.Sprintf("%s:%d", ip, port))
 	if err != nil {
@@ -24,7 +23,8 @@ func connect(ip string, port uint) (net.Conn, error) {
 	}
 
 	if reflect.DeepEqual(passwd[:n], PASSWORD_SET) {
-		return conn, errors.New("need password")
+		*needPasswd = true
+		return conn, nil
 	}
 
 	return conn, nil
@@ -52,15 +52,14 @@ func sendAndReceive(server net.Conn) error {
 }
 
 func startClient(ip *string, port uint, nickname *string) {
-	server, needPass := connect(*ip, port)
+	var needPasswd bool = false
+	server, err := connect(*ip, port, &needPasswd)
 
-	// Clean this shit
-	if server == nil && needPass != nil {
-		console.Error(needPass.Error())
+	if err != nil {
+		console.Error(err.Error())
 		os.Exit(1)
 	
-	} else if needPass != nil {
-		console.Error("%s\n", needPass.Error())
+	} else if needPasswd {
 		var buffer []byte
 		var passwd string
 
