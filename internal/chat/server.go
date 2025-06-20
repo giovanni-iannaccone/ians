@@ -185,8 +185,8 @@ func remove(nickname *string) {
 	}
 }
 
-func startServer(port uint, password *string) error {
-	ln, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
+func startServer(ip string, port uint, password *string) error {
+	ln, err := net.Listen("tcp", fmt.Sprintf("%s:%d", ip, port))
 	if err != nil {
 		return err
 	}

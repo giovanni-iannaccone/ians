@@ -25,9 +25,13 @@ func clientChoice() {
 }
 
 func serverChoice() {
+	var ip string
 	var port uint
 	var pass string
 	var passwd string = ""
+
+	console.Print(console.BoldBlue, "[+] " + console.Reset + "Your ip: ")
+	fmt.Scanf("%d", &ip)
 
 	console.Print(console.BoldBlue, "[+] " + console.Reset + "Your port: ")
 	fmt.Scanf("%d", &port)
@@ -40,7 +44,7 @@ func serverChoice() {
 		fmt.Scanf("%s", &passwd)
 	}
 
-	go startServer(port, &passwd)
+	go startServer(ip, port, &passwd)
 	startShell()
 }
 

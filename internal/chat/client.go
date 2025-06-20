@@ -46,7 +46,7 @@ func sendAndReceive(server net.Conn) error {
 
 	for {
 		fmt.Printf("> ")
-		fmt.Scanf("%s", &message)
+		console.Scan(&message)
 		server.Write([]byte(message))
 	}
 }

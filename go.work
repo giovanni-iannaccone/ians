@@ -20,4 +20,5 @@ use (
     ./pkg/jsonUtils
     ./pkg/pool
     ./pkg/system
+    ./pkg/tcp
 )

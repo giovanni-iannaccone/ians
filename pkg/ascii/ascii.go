@@ -20,6 +20,10 @@ func Sniffer() {
 	console.Print(console.BoldRed, snifferBanner)
 }
 
+func TrojanCreator() {
+	console.Print(console.BoldYellow, trojanCreatorBanner)
+}
+
 func UserRecon() {
 	console.Print(console.BoldBlue, userReconBanner)
 }
