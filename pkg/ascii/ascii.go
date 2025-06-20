@@ -16,6 +16,10 @@ func PortScanner() {
 	console.Print(console.BoldBlue, portScannerBanner)
 }
 
+func SiteMapper() {
+	console.Print(console.BoldBlue, siteMapperBanner)
+}
+
 func Sniffer() {
 	console.Print(console.BoldRed, snifferBanner)
 }
