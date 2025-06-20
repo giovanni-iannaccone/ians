@@ -5,7 +5,6 @@ import (
 
 	"fmt"
 	"net"
-	"os"
 	"reflect"
 )
 
@@ -56,8 +55,7 @@ func startClient(ip *string, port uint, nickname *string) {
 	server, err := connect(*ip, port, &needPasswd)
 
 	if err != nil {
-		console.Error(err.Error())
-		os.Exit(1)
+		console.Fatal(err.Error())
 	
 	} else if needPasswd {
 		var buffer []byte

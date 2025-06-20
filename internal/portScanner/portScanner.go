@@ -8,7 +8,6 @@ import (
 
 	"fmt"
 	"net"
-	"os"
 	"runtime"
 	"strings"
 	"sync"
@@ -129,8 +128,7 @@ func Initialize() {
 
 	addrs, err := net.LookupIP(target)
 	if err != nil {
-		console.Error("Error acquiring IP address: %s", err.Error())
-		os.Exit(1)
+		console.Fatal("Error acquiring IP address: %s", err.Error())
 	}
 	addr := addrs[0].String()
 
@@ -160,7 +158,7 @@ func Initialize() {
 
 	err = run(&jsonData, submitter, addr)
 	if err != nil {
-		console.Error("Error during scan: %s", err.Error())
+		console.Error(err.Error())
 	}
 
 	console.Println(console.Reset, "\n")

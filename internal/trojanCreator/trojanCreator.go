@@ -73,8 +73,6 @@ func showOptions() {
     console.Println(console.BoldBlue, "ftp::cd"   + console.Reset + "\t\tto change the directory a file")
 }
 
-
-
 func takeData() (string, uint) {
 	var ip string
 	var port uint
@@ -119,14 +117,12 @@ func Initialize() {
 
 	err := inject(ip, port, file, ftpCredentials)
 	if err != nil {
-		console.Error(err.Error())
-		os.Exit(1)
+		console.Fatal(err.Error())
 	}
 
 	console.Println(console.BoldGreen, "Starting server on port %d", port)
 	err = tcp.StartTcpServer(ip, port, 1, handle)
 	if err != nil {
-		console.Error(err.Error())
-		os.Exit(1)
+		console.Fatal(err.Error())
 	}
 }
