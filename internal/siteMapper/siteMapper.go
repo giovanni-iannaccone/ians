@@ -4,16 +4,16 @@ import (
 	"ascii"
 	"console"
 	"pool"
-	
+	"progressbar"
+
 	"fmt"
-	"os"
 	"net/http"
+	"os"
 	"runtime"
 	"strings"
-	"sync"
 )
 
-type submitFunction func(pool *pool.ThreadPool, prop properties, words *[]string, wg *sync.WaitGroup)
+type submitFunction func(pool *pool.ThreadPool, prop properties, words *[]string, ch chan bool)
 
 type properties struct {
 	extensions 	[]string
@@ -21,22 +21,29 @@ type properties struct {
 }
 
 type task struct {
+	ch 		chan bool
 	prop 	properties
-	wg   	*sync.WaitGroup
 	word 	string
 }
 
 var STATUS_NOT_FOUND int = 404
 
 func (t *task) Execute() error {
-	defer t.wg.Done()
+	defer func() {
+		t.ch <- true
+	}()
 
 	var url string = t.prop.target + t.word
-	resp, _ := http.Get(url)
-	if resp.StatusCode != STATUS_NOT_FOUND {
-		console.Println(console.BoldGreen, "%s: %d", url, resp.StatusCode)
+	resp, err := http.Get(url)
+	if err != nil {
+		return err
 	}
 
+	if resp.StatusCode != STATUS_NOT_FOUND {
+		console.Println(console.BoldGreen, "%s: %d" + strings.Repeat(" ", 50) + "\n", t.word, resp.StatusCode)
+	}
+
+	resp.Body.Close()
 	return nil
 }
 
@@ -45,8 +52,8 @@ func (t *task) OnFailure(err error) {
 }
 
 func run(prop properties, words *[]string, submitTasks submitFunction) error {
-	wg := &sync.WaitGroup{}
-	wg.Add(len(*words))
+	var totalWords uint = uint(len(*words) * len(prop.extensions))
+	console.Println(console.Red, "%d words will be tryed", totalWords)
 
 	pool, err := pool.NewSimplePool(runtime.NumCPU(), 0)
 	if err != nil {
@@ -56,32 +63,34 @@ func run(prop properties, words *[]string, submitTasks submitFunction) error {
 	pool.Start()
 	defer pool.Stop()
 
-	submitTasks(&pool, prop, words, wg)
-	wg.Wait()
+	ch := make(chan bool)
+	go submitTasks(&pool, prop, words, ch)
+	progressbar.DisplayProgressBar(totalWords, ch)
+
 	return nil
 }
 
-func submitWords(pool *pool.ThreadPool, prop properties, words *[]string, wg *sync.WaitGroup) {
+func submitWords(pool *pool.ThreadPool, prop properties, words *[]string, ch chan bool) {
 	for _, word := range *words {
 		for _, extension := range prop.extensions {
 			(*pool).AddWork(&task{
-				prop: prop,
-				word: word + extension,
-				wg:   wg,
+				ch: 	ch,
+				prop: 	prop,
+				word: 	word + extension,
 			})
 		}
 	}
 }
 
 func takeExtensions() []string {
-	var extensions = []string{"/", "bak", "html", "inc", "js", "orig", "php"}
+	var extensions = []string{"", "bak", "html", "inc", "js", "orig", "php"}
 
 	var option string
-	console.Print(console.BoldBlue, "This are the default extensions: %#v", extensions)
+	console.Println(console.BoldBlue, "This are the default extensions: %s", console.FmtArray(extensions))
 	console.Print(console.Reset, "Do you want to use these ? [y/n] ")
 	fmt.Scanf("%s", &option)
 
-	if option == "y" || option == "Y" {
+	if option != "y" && option != "Y" {
 		var extensionsRaw string
 
 		console.Print(console.BoldBlue, "[+] " + console.Reset + "Write your extensions separated by space: ")

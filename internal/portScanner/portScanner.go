@@ -5,33 +5,30 @@ import (
 	"console"
 	"jsonUtils"
 	"pool"
+	"progressbar"
 
 	"fmt"
 	"net"
 	"runtime"
-	"strings"
 	"sync"
 	"time"
 )
 
 var activePorts []string
 var iterableLength uint = 0
-var loopIndex uint = 0
 var mu sync.Mutex
 
-type submitFunction func(pool *pool.ThreadPool, data *map[string]string, wg *sync.WaitGroup, addr string)
+type submitFunction func(pool *pool.ThreadPool, data *map[string]string, addr string, ch chan(bool))
 
 type scanTask struct {
-	addr string
-	port string
-	wg   *sync.WaitGroup
+	addr	string
+	ch   	chan bool
+	port 	string
 }
 
 func (s *scanTask) Execute() error {
-	defer s.wg.Done()
-
 	var host string = fmt.Sprintf("%s:%s", s.addr, s.port)
-	conn, err := net.DialTimeout("tcp", host, time.Duration(1)*time.Second)
+	conn, err := net.DialTimeout("tcp", host, time.Duration(5) * time.Second)
 	if err == nil {
 		mu.Lock()
 		activePorts = append(activePorts, s.port)
@@ -39,10 +36,7 @@ func (s *scanTask) Execute() error {
 		conn.Close()
 	}
 
-	mu.Lock()
-	loopIndex++
-	mu.Unlock()
-
+	s.ch <- true
 	return err
 }
 
@@ -50,35 +44,18 @@ func (s *scanTask) OnFailure(err error) {
 
 }
 
-func displayProgress() {
-	const barMaxWidth uint = 38
-
-	for {
-		var barWidth uint = barMaxWidth * loopIndex / iterableLength
-		var bar string = strings.Repeat("▉", int(barWidth)) + strings.Repeat("-", int(barMaxWidth - barWidth))
-		var progress string = fmt.Sprintf("%.1f", float32(loopIndex) / float32(iterableLength) * 100)
-
-		console.Print(console.BoldBlue, "[%s] %s\r", bar, progress)
-
-		if progress == "100.0" {
-			return
-		}
-	}
-}
-
 func printPorts(data *map[string]string) {
 	var service string
 
 	for _, port := range activePorts {
 		service = (*data)[port]
-		console.Println(console.BoldGreen, "%s:\t%s" + console.Reset, port, service)
+		console.Println(console.BoldGreen, "%s:\t%s", port, service)
 	}
+
+	console.Println(console.Reset, "")
 }
 
-func run(data *map[string]string, submitTasks submitFunction, addr string) error {
-	wg := &sync.WaitGroup{}
-	wg.Add(int(iterableLength))
-	
+func run(data *map[string]string, submitTasks submitFunction, addr string) error {	
 	pool, err := pool.NewSimplePool(runtime.NumCPU(), 0)
 	if err != nil {
 		return err
@@ -87,29 +64,33 @@ func run(data *map[string]string, submitTasks submitFunction, addr string) error
 	pool.Start()
 	defer pool.Stop()
 
-	go displayProgress()
-	submitTasks(&pool, data, wg, addr)
+	ch := make(chan bool)
+	go submitTasks(&pool, data, addr, ch)
+	progressbar.DisplayProgressBar(iterableLength, ch)
 
-	wg.Wait()
 	return nil
 }
 
-func submitTasksOnCompleteScan(pool *pool.ThreadPool, _ *map[string]string, wg *sync.WaitGroup, addr string) {
+func submitTasksOnCompleteScan(pool *pool.ThreadPool, _ *map[string]string, 
+	addr string, ch chan bool,
+) {
 	for i := uint(1); i <= iterableLength; i++ {
 		(*pool).AddWork(&scanTask{
 			addr: addr,
+			ch: ch,
 			port: fmt.Sprintf("%d", i),
-			wg:   wg,
 		})
 	}
 }
 
-func submitTasksOnPartialScan(pool *pool.ThreadPool, data *map[string]string, wg *sync.WaitGroup, addr string) {
+func submitTasksOnPartialScan(pool *pool.ThreadPool, data *map[string]string, 
+	addr string, ch chan bool,
+) {
 	for port := range *data {
 		(*pool).AddWork(&scanTask{
 			addr: addr,
+			ch: ch,
 			port: port,
-			wg:   wg,
 		})
 	}
 }
@@ -153,7 +134,8 @@ func Initialize() {
 		submitter = submitTasksOnCompleteScan
 	}
 
-	console.Println(console.Red, "\nScanner is ready, press ENTER to start...")
+	console.Println(console.Red, "\n%d ports will be scanned", iterableLength)
+	console.Println(console.Red, "Scanner is ready, press ENTER to start...")
 	fmt.Scanln()
 
 	err = run(&jsonData, submitter, addr)

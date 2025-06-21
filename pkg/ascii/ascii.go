@@ -4,6 +4,10 @@ import (
 	"console"
 )
 
+func Bruteforce() {
+	console.Print(console.BoldBlue, bruteforceBanner)
+}
+
 func Chat() {
 	console.Print(console.BoldYellow, chatBanner)
 }

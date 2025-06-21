@@ -19,6 +19,7 @@ use (
     ./pkg/console
     ./pkg/jsonUtils
     ./pkg/pool
+    ./pkg/progressbar
     ./pkg/system
     ./pkg/tcp
 )
