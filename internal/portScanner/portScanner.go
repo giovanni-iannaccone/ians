@@ -4,12 +4,10 @@ import (
 	"ascii"
 	"console"
 	"jsonUtils"
-	"pool"
 	"progressbar"
 
 	"fmt"
 	"net"
-	"runtime"
 	"sync"
 	"time"
 )
@@ -18,31 +16,7 @@ var activePorts []string
 var iterableLength uint = 0
 var mu sync.Mutex
 
-type submitFunction func(pool *pool.ThreadPool, data *map[string]string, addr string, ch chan(bool))
-
-type scanTask struct {
-	addr	string
-	ch   	chan bool
-	port 	string
-}
-
-func (s *scanTask) Execute() error {
-	var host string = fmt.Sprintf("%s:%s", s.addr, s.port)
-	conn, err := net.DialTimeout("tcp", host, time.Duration(5) * time.Second)
-	if err == nil {
-		mu.Lock()
-		activePorts = append(activePorts, s.port)
-		mu.Unlock()
-		conn.Close()
-	}
-
-	s.ch <- true
-	return err
-}
-
-func (s *scanTask) OnFailure(err error) {
-
-}
+type submitFunction func(ch chan bool, data *map[string]string, addr string)
 
 func printPorts(data *map[string]string) {
 	var service string
@@ -56,42 +30,51 @@ func printPorts(data *map[string]string) {
 }
 
 func run(data *map[string]string, submitTasks submitFunction, addr string) error {	
-	pool, err := pool.NewSimplePool(runtime.NumCPU(), 0)
-	if err != nil {
-		return err
-	}
-
-	pool.Start()
-	defer pool.Stop()
-
 	ch := make(chan bool)
-	go submitTasks(&pool, data, addr, ch)
+	go submitTasks(ch, data, addr)
 	progressbar.DisplayProgressBar(iterableLength, ch)
 
 	return nil
 }
 
-func submitTasksOnCompleteScan(pool *pool.ThreadPool, _ *map[string]string, 
-	addr string, ch chan bool,
+func scanPort(ch chan bool, addr string, port string) error {
+	defer func() {
+		ch <- true
+	}()
+	
+	var host string = fmt.Sprintf("%s:%s", addr, port)
+	conn, err := net.DialTimeout("tcp", host, time.Duration(5) * time.Second)
+	if err == nil {
+		mu.Lock()
+		activePorts = append(activePorts, port)
+		mu.Unlock()
+		conn.Close()
+	}
+
+	return err
+}
+
+func submitTasksOnCompleteScan(ch chan bool, 
+	_ *map[string]string, addr string,
 ) {
 	for i := uint(1); i <= iterableLength; i++ {
-		(*pool).AddWork(&scanTask{
-			addr: addr,
-			ch: ch,
-			port: fmt.Sprintf("%d", i),
-		})
+		go scanPort(
+			ch,
+			addr,
+			fmt.Sprintf("%d", i),
+		)
 	}
 }
 
-func submitTasksOnPartialScan(pool *pool.ThreadPool, data *map[string]string, 
-	addr string, ch chan bool,
+func submitTasksOnPartialScan(ch chan bool,
+	data *map[string]string, addr string,
 ) {
 	for port := range *data {
-		(*pool).AddWork(&scanTask{
-			addr: addr,
-			ch: ch,
-			port: port,
-		})
+		go scanPort(
+			ch,
+			addr,
+			port,
+		)
 	}
 }
 

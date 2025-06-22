@@ -63,7 +63,7 @@ var socials = map[string]string{
 	"Youtube": "https://youtube.com/%s",
 }
 
-func check(username string) {
+func check(ch chan bool, username string) {
 	for key, value := range socials {
 		go func (key string, value string) {
 			var url string = fmt.Sprintf(value, username)
@@ -74,11 +74,14 @@ func check(username string) {
 			} else {
 				console.Println(console.BoldRed, "%s: not found\t\t%d", key, resp.StatusCode)
 			}
+
+			ch <- true
 		}(key, value)
 	}
 }
 
 func Initialize() {
+	var loopIndex int = 0
 	var username string
 
 	ascii.UserRecon()
@@ -87,6 +90,14 @@ func Initialize() {
 	console.Print(console.BoldBlue, "[+] " + console.Reset + "Enter the username you want to search: ")
 	fmt.Scanf("%s", &username)
 
-	check(username)
+	ch := make(chan bool)
+	go check(ch, username)
+	
+	for <- ch {
+		loopIndex += 1
+		if loopIndex == len(socials) {
+			break
+		}
+	}
 	fmt.Scanln()
 }

@@ -3,81 +3,61 @@ package siteMapper
 import (
 	"ascii"
 	"console"
-	"pool"
 	"progressbar"
 
 	"fmt"
 	"net/http"
 	"os"
-	"runtime"
 	"strings"
 )
 
-type submitFunction func(pool *pool.ThreadPool, prop properties, words *[]string, ch chan bool)
+type submitFunction func(ch chan bool, prop properties, words *[]string)
 
 type properties struct {
 	extensions 	[]string
 	target 		string
 }
 
-type task struct {
-	ch 		chan bool
-	prop 	properties
-	word 	string
-}
-
 var STATUS_NOT_FOUND int = 404
 
-func (t *task) Execute() error {
+func existsSubdir(ch chan bool, prop properties, word string) error {
 	defer func() {
-		t.ch <- true
+		ch <- true
 	}()
 
-	var url string = t.prop.target + t.word
+	var url string = prop.target + word
 	resp, err := http.Get(url)
 	if err != nil {
 		return err
 	}
 
 	if resp.StatusCode != STATUS_NOT_FOUND {
-		console.Println(console.BoldGreen, "%s: %d" + strings.Repeat(" ", 50) + "\n", t.word, resp.StatusCode)
+		console.Println(console.BoldGreen, "%s: %d" + strings.Repeat(" ", 50) + "\n", word, resp.StatusCode)
 	}
 
 	resp.Body.Close()
 	return nil
 }
 
-func (t *task) OnFailure(err error) {
-
-}
-
 func run(prop properties, words *[]string, submitTasks submitFunction) error {
 	var totalWords uint = uint(len(*words) * len(prop.extensions))
 	console.Println(console.Red, "%d words will be tryed", totalWords)
 
-	pool, err := pool.NewSimplePool(runtime.NumCPU(), 0)
-	if err != nil {
-		return err
-	}
-
-	pool.Start()
-	defer pool.Stop()
-
 	ch := make(chan bool)
-	go submitTasks(&pool, prop, words, ch)
+	go submitTasks(ch, prop, words)
 	progressbar.DisplayProgressBar(totalWords, ch)
 
 	return nil
 }
 
-func submitWords(pool *pool.ThreadPool, prop properties, words *[]string, ch chan bool) {
+func submitWords(ch chan bool, prop properties, words *[]string) {
 	for _, word := range *words {
 		for _, extension := range prop.extensions {
-			(*pool).AddWork(&task{
-				ch: 	ch,
-				prop: 	prop,
-				word: 	word + extension,
-			})
+			go existsSubdir(
+				ch,
+				prop,
+				word + extension,
+			)
 		}
 	}
 }
