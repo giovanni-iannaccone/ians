@@ -63,20 +63,28 @@ var socials = map[string]string{
 	"Youtube": "https://youtube.com/%s",
 }
 
-func check(ch chan bool, username string) {
-	for key, value := range socials {
-		go func (key string, value string) {
-			var url string = fmt.Sprintf(value, username)
-			resp, _ := http.Get(url)
+func check(ch chan bool, username, social string, link string) {
+	defer func() {
+		ch <- true
+	}()
 
-			if resp.StatusCode == 200 {
-				console.Println(console.BoldGreen, "%s: found ✔", key)
-			} else {
-				console.Println(console.BoldRed, "%s: not found\t\t%d", key, resp.StatusCode)
-			}
+	var url string = fmt.Sprintf(link, username)
+	resp, err := http.Get(url)
+	if err != nil {
+		console.Error(err.Error())
+		return 
+	}
 
-			ch <- true
-		}(key, value)
+	if resp.StatusCode == 200 {
+		console.Println(console.BoldGreen, "%s: %s", social, url)
+	} else {
+		console.Println(console.BoldRed, "%s: not found\t\t%d", social, resp.StatusCode)
+	}
+}
+
+func run(ch chan bool, username string) {
+	for name, url := range socials {
+		go check(ch, username, name, url)
 	}
 }
 
@@ -85,13 +93,13 @@ func Initialize() {
 	var username string
 
 	ascii.UserRecon()
-	console.Println(console.BoldRed, "  A username's finder across 46 social networks")
+	console.Println(console.BoldRed, "  A username's finder across %d social networks", len(socials))
 
 	console.Print(console.BoldBlue, "[+] " + console.Reset + "Enter the username you want to search: ")
 	fmt.Scanf("%s", &username)
 
 	ch := make(chan bool)
-	go check(ch, username)
+	run(ch, username)
 	
 	for <- ch {
 		loopIndex += 1
@@ -99,5 +107,6 @@ func Initialize() {
 			break
 		}
 	}
+	console.Print(console.BoldBlue, "\nDone")
 	fmt.Scanln()
 }
