@@ -1,5 +1,0 @@
-package arpPoison
-
-func Initialize() {
-	
-}

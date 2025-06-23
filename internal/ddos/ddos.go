@@ -1,5 +1,0 @@
-package ddos
-
-func Initialize() {
-	
-}
