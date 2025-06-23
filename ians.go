@@ -1,10 +1,8 @@
 package main
 
 import (
-	"arpPoison"
 	"bruteforce"
 	"chat"
-	"ddos"
 	"portScanner"
 	"siteMapper"
 	"sniffer"
@@ -28,7 +26,9 @@ func exit() {
 }
 
 func findConnected() {
-
+	var iface string
+	console.Print(console.BoldBlue, "[+] " + console.Reset + "Enter the interface: ")
+	fmt.Scanf("%s", &iface)
 }
 
 func handleOption(option uint) {
@@ -40,36 +40,30 @@ func handleOption(option uint) {
 		sniffer.Initialize()
 
 	case 3:
-		ddos.Initialize()
-
-	case 4:
-		arpPoison.Initialize()
-
-	case 5:
 		bruteforce.Initialize()
 	
-	case 6:
+	case 4:
 		trojanCreator.Initialize()
 
-	case 7:
+	case 5:
 		chat.Initialize()
 	
-	case 8:
+	case 6:
 		siteMapper.Initialize()
+	
+	case 7:
+		userRecon.Initialize()
 
-	case 9:
+	case 8:
 		findConnected()
 	
-	case 10:
-		userRecon.Initialize()
-	
-	case 11:
+	case 9:
 		printInfo()
 
-	case 12:
+	case 10:
 		update()
 	
-	case 13:
+	case 11:
 		exit()
 
 	default:
@@ -94,19 +88,17 @@ and the author is not responsible for any malicious tool of ians
 func showOptions() {
 	console.Println(console.BoldBlue, "[1]" + console.Reset + " Port scanner\tfor port scanning")
     console.Println(console.BoldBlue, "[2]" + console.Reset + " Sniffer\t\tfor sniffing ")
-    console.Println(console.BoldBlue, "[3]" + console.Reset + " DDos attack\t\tto start a DDos attack ")
-    console.Println(console.BoldBlue, "[4]" + console.Reset + " Arp poison\t\tfor ARP poisoning")
-    console.Println(console.BoldBlue, "[5]" + console.Reset + " SSH Bruteforce\tbruteforce ssh credentials")
-    console.Println(console.BoldBlue, "[6]" + console.Reset + " Trojan creator\tto create a trojan ")
-    console.Println(console.BoldBlue, "[7]" + console.Reset + " Chat\t\tto create a private chat room ")
-    console.Println(console.BoldBlue, "[8]" + console.Reset + " Site mapper\t\tbruteforce a site's directories")
-    console.Println(console.BoldBlue, "[9]" + console.Reset + " Find\t\twho is connected to the router")
-    console.Println(console.BoldBlue, "[10]" + console.Reset + " User recon\t\tfind username on social")
+    console.Println(console.BoldBlue, "[3]" + console.Reset + " SSH Bruteforce\tbruteforce ssh credentials")
+    console.Println(console.BoldBlue, "[4]" + console.Reset + " Trojan creator\tto create a trojan ")
+    console.Println(console.BoldBlue, "[5]" + console.Reset + " Chat\t\tto create a private chat room ")
+    console.Println(console.BoldBlue, "[6]" + console.Reset + " Site mapper\t\tbruteforce a site's directories")
+    console.Println(console.BoldBlue, "[7]" + console.Reset + " User recon\t\tfind username on social")
+    console.Println(console.BoldBlue, "[8]" + console.Reset + " Find\t\twho is connected to the router")
 
     console.Println(console.Reset, "\nNon hacking options:")
-    console.Println(console.BoldBlue, "[11]" + console.Reset + " info\tinfo on the tool")
-    console.Println(console.BoldBlue, "[12]" + console.Reset + " update\tupdate ians")
-    console.Println(console.BoldBlue, "[13]" + console.Reset + " exit\tbye bye :(")
+    console.Println(console.BoldBlue, "[9]" + console.Reset + " info\tinfo on the tool")
+    console.Println(console.BoldBlue, "[10]" + console.Reset + " update\tupdate ians")
+    console.Println(console.BoldBlue, "[11]" + console.Reset + " exit\tbye bye :(")
 }
 
 func takeOption() uint {

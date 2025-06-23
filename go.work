@@ -4,10 +4,8 @@ use (
 	./
 
 	./internal
-	./internal/arpPoison
 	./internal/bruteforce
 	./internal/chat
-	./internal/ddos
 	./internal/portScanner
 	./internal/siteMapper
 	./internal/sniffer
