@@ -1,3 +1,5 @@
+<img src="assets/main-view.png"> </img>
+
 # 🐉 ians
 ians is the "swiss army knife" of hacking, perfect for a variety of tactical operations
 
@@ -46,35 +48,34 @@ ians is the "swiss army knife" of hacking, perfect for a variety of tactical ope
 
 ## 🎮 Usage
 Write the number corrisponding to the attack you want to run
-<img src="assets/main-view.png"> </img>
 
-1. the port scanner
+1. port scanner </br>
 Type target's ip or hostname, select the type of scan and press enter
 <img src="assets/port-scanner.png"> </img>
 
-2. sniffer
+2. sniffer </br>
 Every captured packet will be printed in a decoded format
 <img src="assets/sniffer.png"> </img>
 
-3. ssh bruteforce
+3. ssh bruteforce </br>
 Enter username (or a wordlist), password (or a wordlist), press enter and wait
 <img src="assets/ssh-bruteforce.png"> </img>
 
-4. trojan creator
+4. trojan creator </br>
 Type your ip and port, file to infect's path and your ftp credentials (optional). </br>
 Send the trojan to your victim and wait for him to execute it.
 <img src="assets/trojan-creator.png"> </img>
 
-5. chatroom
+5. chatroom </br>
 Host a chatroom or connect to an existing one. If you connect send messages to other users, </br>
 if you are hosting, manage your room by setting a password, removing and blocking users.
 <img src="assets/chatroom.png"> </img>
 
-6. site mapper
+6. site mapper </br>
 Enter site's url, file extensions (optional) and a wordlist path, press enter and wait
 <img src="assets/site-mapper.png"> </img>
 
-7. user recon
+7. user recon </br>
 Type a username and search it across many social media
 <img src="assets/userrecon.png"> </img>
 
