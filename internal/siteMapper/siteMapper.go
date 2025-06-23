@@ -3,11 +3,11 @@ package siteMapper
 import (
 	"ascii"
 	"console"
+	"files"
 	"progressbar"
 
 	"fmt"
 	"net/http"
-	"os"
 	"strings"
 )
 
@@ -95,17 +95,12 @@ func Initialize() {
 	console.Print(console.BoldBlue, "[+] " + console.Reset + "Enter the wordlist's path: ")
 	fmt.Scanf("%s", &path)
 
-	buffer, err := os.ReadFile(path)
-	if err != nil {
-		console.Fatal(err.Error())
-	}
-
-	var words []string = strings.Split(string(buffer), "\n")
+	words := files.ReadLineByLine(path, true)
 
 	console.Println(console.Red, "\nMapper is ready, press ENTER to start...")
 	fmt.Scanln()
 
-	err = run(properties{extensions, target}, &words, submitWords)
+	err := run(properties{extensions, target}, &words, submitWords)
 	if err != nil {
 		console.Error(err.Error())
 	}

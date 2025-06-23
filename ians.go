@@ -78,7 +78,17 @@ func handleOption(option uint) {
 }
 
 func printInfo() {
+	ascii.Info()
 
+    console.Println(console.BoldBlue, "Author" + console.Reset + ": Giovanni Iannaccone")
+    console.Println(console.BoldBlue, "Version" + console.Reset + ": %s", VERSION)
+    console.Println(console.BoldRed, `
+Tool written for educational purpose only, the user know what he is doing 
+and the author is not responsible for any malicious tool of ians
+`)
+
+    console.Println(console.Red, "Press ENTER to continue ")
+	fmt.Scanln()
 }
 
 func showOptions() {
@@ -86,11 +96,11 @@ func showOptions() {
     console.Println(console.BoldBlue, "[2]" + console.Reset + " Sniffer\t\tfor sniffing ")
     console.Println(console.BoldBlue, "[3]" + console.Reset + " DDos attack\t\tto start a DDos attack ")
     console.Println(console.BoldBlue, "[4]" + console.Reset + " Arp poison\t\tfor ARP poisoning")
-    console.Println(console.BoldBlue, "[5]" + console.Reset + " Bruteforce\t\tfor bruteforce ")
+    console.Println(console.BoldBlue, "[5]" + console.Reset + " SSH Bruteforce\tbruteforce ssh credentials")
     console.Println(console.BoldBlue, "[6]" + console.Reset + " Trojan creator\tto create a trojan ")
     console.Println(console.BoldBlue, "[7]" + console.Reset + " Chat\t\tto create a private chat room ")
-    console.Println(console.BoldBlue, "[8]" + console.Reset + " Site mapper\t\tmap a site ")
-    console.Println(console.BoldBlue, "[9]" + console.Reset + " Find\t\twho is connected to the router ")
+    console.Println(console.BoldBlue, "[8]" + console.Reset + " Site mapper\t\tbruteforce a site's directories")
+    console.Println(console.BoldBlue, "[9]" + console.Reset + " Find\t\twho is connected to the router")
     console.Println(console.BoldBlue, "[10]" + console.Reset + " User recon\t\tfind username on social")
 
     console.Println(console.Reset, "\nNon hacking options:")
@@ -136,6 +146,8 @@ func main() {
 	for {
 		console.Clear()
 		ascii.Main(VERSION)
+		console.Println(console.BoldRed, 	"    FOR EDUCATIONAL PURPOSE ONLY")
+    	console.Println(console.BoldWhite, 	"    SELECT AN OPTION TO CONTINUE\n")
 		showOptions()
 		var option uint = takeOption()
 

@@ -12,6 +12,10 @@ func Chat() {
 	console.Print(console.BoldYellow, chatBanner)
 }
 
+func Info() {
+	console.Print(console.BoldWhite, infoBanner)
+}
+
 func Main(version string) {
 	console.Print(console.BoldGreen, mainBanner, version)
 }

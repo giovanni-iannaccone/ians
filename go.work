@@ -1,24 +1,25 @@
-go 1.21.5
+go 1.23.0
 
 use (
-    ./
-    
-    ./internal
-    ./internal/arpPoison
-    ./internal/bruteforce
-    ./internal/chat
-    ./internal/ddos
-    ./internal/portScanner
-    ./internal/siteMapper
-    ./internal/sniffer
-    ./internal/trojanCreator
-    ./internal/userRecon
-    
-    ./pkg
-    ./pkg/ascii
-    ./pkg/console
-    ./pkg/jsonUtils
-    ./pkg/progressbar
-    ./pkg/system
-    ./pkg/tcp
+	./
+
+	./internal
+	./internal/arpPoison
+	./internal/bruteforce
+	./internal/chat
+	./internal/ddos
+	./internal/portScanner
+	./internal/siteMapper
+	./internal/sniffer
+	./internal/trojanCreator
+	./internal/userRecon
+
+	./pkg
+	./pkg/ascii
+	./pkg/console
+	./pkg/files
+	./pkg/jsonUtils
+	./pkg/progressbar
+	./pkg/system
+	./pkg/tcp
 )
