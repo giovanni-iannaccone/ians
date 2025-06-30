@@ -63,7 +63,7 @@ func submitWords(ch chan bool, prop properties, words *[]string) {
 }
 
 func takeExtensions() []string {
-	var extensions = []string{"", "bak", "html", "inc", "js", "orig", "php"}
+	var extensions = []string{"", ".bak", ".html", ".inc", ".js", ".orig", ".php"}
 
 	var option string
 	console.Println(console.BoldBlue, "This are the default extensions: %s", console.FmtArray(extensions))

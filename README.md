@@ -92,10 +92,10 @@ We welcome contributions! Please follow these steps:
 Golang: https://go.dev/doc/ </br>
 Hacking: https://tryhackme.com/
 
-## ⚖ License
+## ⚖️ License
 This project is licensed under the GPL-3.0 License. See the LICENSE file for details.
 
-## ⚔ Contact
+## ⚔️ Contact
 - For any inquiries or support, please contact <a href="mailto:iannacconegiovanni444@gmail.com"> iannacconegiovanni444@gmail.com </a>.
 - Visit my site for more informations about me and my work <a href="https://giovanni-iannaccone.gith
 ub.io" target=”_blank” rel="noopener noreferrer"> https://giovanni-iannaccone.github.io </a>
