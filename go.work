@@ -6,6 +6,7 @@ use (
 	./internal
 	./internal/bruteforce
 	./internal/chat
+	./internal/findConnected
 	./internal/portScanner
 	./internal/siteMapper
 	./internal/sniffer

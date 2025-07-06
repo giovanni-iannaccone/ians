@@ -12,6 +12,10 @@ func Chat() {
 	console.Print(console.BoldYellow, chatBanner)
 }
 
+func FindConnected() {
+	console.Print(console.BoldGreen, findConnectedBanner)
+}
+
 func Info() {
 	console.Print(console.BoldWhite, infoBanner)
 }

@@ -3,6 +3,7 @@ package main
 import (
 	"bruteforce"
 	"chat"
+	"findConnected"
 	"portScanner"
 	"siteMapper"
 	"sniffer"
@@ -23,12 +24,6 @@ const VERSION = "2.0"
 func exit() {
 	console.Println(console.BoldRed, "Bye bye :)")
 	os.Exit(0)
-}
-
-func findConnected() {
-	var iface string
-	console.Print(console.BoldBlue, "[+] " + console.Reset + "Enter the interface: ")
-	fmt.Scanf("%s", &iface)
 }
 
 func handleOption(option uint) {
@@ -55,7 +50,7 @@ func handleOption(option uint) {
 		userRecon.Initialize()
 
 	case 8:
-		findConnected()
+		findConnected.Initialize()
 	
 	case 9:
 		printInfo()
