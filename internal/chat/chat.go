@@ -1,10 +1,10 @@
 package chat 
 
 import (
-	"ascii"
-	"console"
-
 	"fmt"
+	
+	"github.com/giovanni-iannaccone/ians/pkg/ascii"
+	"github.com/giovanni-iannaccone/ians/pkg/console"
 )
 
 func clientChoice() {

@@ -1,11 +1,11 @@
 package sniffer
 
 import (
-	"ascii"
-	"console"
-	"system"
-
 	"fmt"
+
+	"github.com/giovanni-iannaccone/ians/pkg/ascii"
+	"github.com/giovanni-iannaccone/ians/pkg/console"
+	"github.com/giovanni-iannaccone/ians/pkg/system"
 )
 
 func run(ip *string) error {

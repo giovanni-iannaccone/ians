@@ -1,7 +1,7 @@
 package ascii
 
 import (
-	"console"
+	"github.com/giovanni-iannaccone/ians/pkg/console"
 )
 
 func Bruteforce() {

@@ -1,15 +1,15 @@
 package portScanner
 
 import (
-	"ascii"
-	"console"
-	"jsonUtils"
-	"progressbar"
-
 	"fmt"
 	"net"
 	"sync"
 	"time"
+
+	"github.com/giovanni-iannaccone/ians/pkg/ascii"
+	"github.com/giovanni-iannaccone/ians/pkg/console"
+	"github.com/giovanni-iannaccone/ians/pkg/jsonUtils"
+	"github.com/giovanni-iannaccone/ians/pkg/progressbar"
 )
 
 var activePorts []string

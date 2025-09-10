@@ -1,11 +1,11 @@
 package chat
 
 import (
-	"console"
-
 	"fmt"
 	"net"
 	"reflect"
+	
+	"github.com/giovanni-iannaccone/ians/pkg/console"
 )
 
 func connect(ip string, port uint, needPasswd *bool) (net.Conn, error) {

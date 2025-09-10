@@ -1,13 +1,13 @@
 package bruteforce
 
 import (
-	"ascii"
-	"console"
-	"files"
-
 	"fmt"
 	"sync"
 	"time"
+	
+	"github.com/giovanni-iannaccone/ians/pkg/ascii"
+	"github.com/giovanni-iannaccone/ians/pkg/console"
+	"github.com/giovanni-iannaccone/ians/pkg/files"
 
 	"golang.org/x/crypto/ssh"
 )

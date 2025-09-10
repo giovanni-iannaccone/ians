@@ -1,13 +1,13 @@
 package trojanCreator
 
 import (
-	"ascii"
-	"console"
-	"tcp"
-
 	"fmt"
 	"net"
 	"os"
+	
+	"github.com/giovanni-iannaccone/ians/pkg/ascii"
+	"github.com/giovanni-iannaccone/ians/pkg/console"
+	"github.com/giovanni-iannaccone/ians/pkg/tcp"
 )
 
 func getOSInfo(conn net.Conn) {

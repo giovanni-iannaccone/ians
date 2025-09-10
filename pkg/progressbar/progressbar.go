@@ -1,9 +1,9 @@
 package progressbar
 
 import (
-	"console"
-
 	"strings"
+	
+	"github.com/giovanni-iannaccone/ians/pkg/console"
 )
 
 func DisplayProgressBar(max uint, ch chan bool) {

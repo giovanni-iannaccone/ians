@@ -1,14 +1,14 @@
 package findConnected
 
 import (
-	"ascii"
-	"console"
-
 	"errors"
 	"fmt"
 	"net"
 	"os/exec"
 	"strconv"
+	
+	"github.com/giovanni-iannaccone/ians/pkg/ascii"
+	"github.com/giovanni-iannaccone/ians/pkg/console"
 )
 
 func bruteforcePing(activeList *[]int, ip int, broadcast int) int {

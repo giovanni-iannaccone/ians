@@ -1,10 +1,10 @@
 package files
 
 import (
-	"console"
-
 	"os"
 	"strings"
+	
+	"github.com/giovanni-iannaccone/ians/pkg/console"
 )
 
 func ReadLineByLine(path string, printErrors bool) []string {

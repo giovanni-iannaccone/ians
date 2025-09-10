@@ -1,22 +1,22 @@
 package main
 
 import (
-	"bruteforce"
-	"chat"
-	"findConnected"
-	"portScanner"
-	"siteMapper"
-	"sniffer"
-	"trojanCreator"
-	"userRecon"
-
-	"ascii"
-	"console"
-	"system"
-
 	"fmt"
 	"os"
 	"time"
+
+	"github.com/giovanni-iannaccone/ians/internal/bruteforce"
+	"github.com/giovanni-iannaccone/ians/internal/chat"
+	"github.com/giovanni-iannaccone/ians/internal/findConnected"
+	"github.com/giovanni-iannaccone/ians/internal/portScanner"
+	"github.com/giovanni-iannaccone/ians/internal/siteMapper"
+	"github.com/giovanni-iannaccone/ians/internal/sniffer"
+	"github.com/giovanni-iannaccone/ians/internal/trojanCreator"
+	"github.com/giovanni-iannaccone/ians/internal/userRecon"
+
+	"github.com/giovanni-iannaccone/ians/pkg/ascii"
+	"github.com/giovanni-iannaccone/ians/pkg/console"
+	"github.com/giovanni-iannaccone/ians/pkg/system"
 )
 
 const VERSION = "2.0"

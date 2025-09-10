@@ -1,13 +1,13 @@
 package chat
 
 import (
-	"console"
-
 	"bufio"
 	"fmt"
 	"os"
 	"net"
 	"strings"
+	
+	"github.com/giovanni-iannaccone/ians/pkg/console"
 )
 
 var PASSWORD_SET = []byte("1")

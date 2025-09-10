@@ -1,11 +1,11 @@
 package userRecon
 
 import (
-	"ascii"
-	"console"
-
 	"fmt"
 	"net/http"
+	
+	"github.com/giovanni-iannaccone/ians/pkg/ascii"
+	"github.com/giovanni-iannaccone/ians/pkg/console"
 )
 
 var socials = map[string]string{

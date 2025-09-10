@@ -1,14 +1,14 @@
 package siteMapper
 
 import (
-	"ascii"
-	"console"
-	"files"
-	"progressbar"
-
 	"fmt"
 	"net/http"
 	"strings"
+	
+	"github.com/giovanni-iannaccone/ians/pkg/ascii"
+	"github.com/giovanni-iannaccone/ians/pkg/console"
+	"github.com/giovanni-iannaccone/ians/pkg/files"
+	"github.com/giovanni-iannaccone/ians/pkg/progressbar"
 )
 
 type submitFunction func(ch chan bool, prop properties, words *[]string)

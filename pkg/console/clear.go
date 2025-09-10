@@ -1,7 +1,7 @@
 package console
 
 import (
-	"system"
+	"github.com/giovanni-iannaccone/ians/pkg/system"
 )
 
 func Clear() {
